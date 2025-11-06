@@ -232,37 +232,32 @@ workflows:
             - fan_out
             - be_kind_to_your_colleagues
           context:
-            - cdk-deploy-to-shared-aspire-20211202
+            - cdk-deploy-to-leanlibrary-sandbox-20250709
             - aws-region-eu
-            - talis-cdk-constructs-build
       - deploy-lambda-worker:
           requires:
             - build
           context:
-            - cdk-deploy-to-shared-aspire-20211202
+            - cdk-deploy-to-leanlibrary-sandbox-20250709
             - aws-region-eu
-            - talis-cdk-constructs-build
       - deploy-authenticated-api:
           requires:
             - build
           context:
-            - cdk-deploy-to-shared-aspire-20211202
+            - cdk-deploy-to-leanlibrary-sandbox-20250709
             - aws-region-eu
-            - talis-cdk-constructs-build
       - deploy-authenticated-rest-api:
           requires:
             - build
           context:
-            - cdk-deploy-to-shared-aspire-20211202
+            - cdk-deploy-to-leanlibrary-sandbox-20250709
             - aws-region-eu
-            - talis-cdk-constructs-build
       - deploy-cdn-site-hosting:
           requires:
             - build
           context:
-            - cdk-deploy-to-shared-aspire-20211202
+            - cdk-deploy-to-leanlibrary-sandbox-20250709
             - aws-region-eu
-            - talis-cdk-constructs-build
       - test:
           requires:
             - deploy-lambda-worker
@@ -270,37 +265,32 @@ workflows:
             - deploy-authenticated-rest-api
             - deploy-cdn-site-hosting
           context:
-            - cdk-deploy-to-shared-aspire-20211202
+            - cdk-deploy-to-leanlibrary-sandbox-20250709
             - aws-region-eu
-            - talis-cdk-constructs-build
       - destroy-lambda-worker:
           requires:
             - test
           context:
-            - cdk-deploy-to-shared-aspire-20211202
+            - cdk-deploy-to-leanlibrary-sandbox-20250709
             - aws-region-eu
-            - talis-cdk-constructs-build
       - destroy-authenticated-api:
           requires:
             - test
           context:
-            - cdk-deploy-to-shared-aspire-20211202
+            - cdk-deploy-to-leanlibrary-sandbox-20250709
             - aws-region-eu
-            - talis-cdk-constructs-build
       - destroy-authenticated-rest-api:
           requires:
             - test
           context:
-            - cdk-deploy-to-shared-aspire-20211202
+            - cdk-deploy-to-leanlibrary-sandbox-20250709
             - aws-region-eu
-            - talis-cdk-constructs-build
       - destroy-cdn-site-hosting:
           requires:
             - test
           context:
-            - cdk-deploy-to-shared-aspire-20211202
+            - cdk-deploy-to-leanlibrary-sandbox-20250709
             - aws-region-eu
-            - talis-cdk-constructs-build
       - semantic-release:
           requires:
             - destroy-lambda-worker
@@ -308,6 +298,5 @@ workflows:
             - destroy-authenticated-rest-api
             - destroy-cdn-site-hosting
           context:
-            - cdk-deploy-to-shared-aspire-20211202
+            - cdk-deploy-to-leanlibrary-sandbox-20250709
             - aws-region-eu
-            - talis-cdk-constructs-build
