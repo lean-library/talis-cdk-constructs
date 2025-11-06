@@ -49,7 +49,7 @@ export class SimpleCdnSiteHostingConstructStack extends cdk.Stack {
       this,
       `${prefix}CdnSiteHostingWithDnsConstruct`,
       {
-        domainName: "talis.io",
+        domainName: "leanlibrary.io",
         removalPolicy: cdk.RemovalPolicy.DESTROY,
         // siteSubDomain: This would be the watermarked domain name e.g. elevate-20231025 from https://elevate-20231025.talis.com
         siteSubDomain: `${prefix}cdn-site-hosting-with-dns-construct`,
