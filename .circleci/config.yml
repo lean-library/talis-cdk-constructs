@@ -134,32 +134,6 @@ jobs:
       - run:
           name: Destroy lambda worker example code
           command: cd examples/simple-lambda-worker && npm install && npm run build && npx cdk --require-approval never destroy --force
-  destroy-authenticated-api:
-    executor: default_executor
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "ee:b4:00:e6:23:5b:55:bb:fd:07:bc:73:9e:f7:89:9c" # shared.aspire@talis.com 'talis-cdk-constructs Deploy Key'
-      - restore_root_build_number
-      - set_aws_prefix
-      - checkout
-      - node_install_packages
-      - run:
-          name: Destroy authenticated api example code
-          command: cd examples/simple-authenticated-api && npm install && npm run build && npx cdk --require-approval never destroy --force
-  destroy-authenticated-rest-api:
-    executor: default_executor
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "ee:b4:00:e6:23:5b:55:bb:fd:07:bc:73:9e:f7:89:9c" # shared.aspire@talis.com 'talis-cdk-constructs Deploy Key'
-      - restore_root_build_number
-      - set_aws_prefix
-      - checkout
-      - node_install_packages
-      - run:
-          name: Destroy authenticated rest api example code
-          command: cd examples/simple-authenticated-rest-api && npm install && npm run build && npx cdk --require-approval never destroy --force
   destroy-cdn-site-hosting:
     executor: default_executor
     steps:
@@ -234,18 +208,6 @@ workflows:
           context:
             - cdk-deploy-to-leanlibrary-sandbox-20250709
             - aws-region-eu
-      - destroy-authenticated-api:
-          requires:
-            - test
-          context:
-            - cdk-deploy-to-leanlibrary-sandbox-20250709
-            - aws-region-eu
-      - destroy-authenticated-rest-api:
-          requires:
-            - test
-          context:
-            - cdk-deploy-to-leanlibrary-sandbox-20250709
-            - aws-region-eu
       - destroy-cdn-site-hosting:
           requires:
             - test
@@ -255,8 +217,6 @@ workflows:
       - semantic-release:
           requires:
             - destroy-lambda-worker
-            - destroy-authenticated-api
-            - destroy-authenticated-rest-api
             - destroy-cdn-site-hosting
           context:
             - cdk-deploy-to-leanlibrary-sandbox-20250709
