@@ -41,7 +41,7 @@ Therefore, production deployments should use the CdnSiteHostingConstruct and set
       this,
       `TalisAppCdnSiteHostingConstruct`,
       {
-        domainName: "talis.io",
+        domainName: "leanlibrary.io",
         siteSubDomain: `production-eu-20231025-talis-app`,
         aliasSubDomains: ['talis-app'],
         ...
@@ -51,8 +51,8 @@ Therefore, production deployments should use the CdnSiteHostingConstruct and set
 
 The above will create a cloud front distribution with two aliases:
 
-- `production-eu-20231025-talis-app.talis.io`
-- `talis-app.talis.io`
+- `production-eu-20231025-talis-app.leanlibrary.io`
+- `talis-app.leanlibrary.io`
 
 Outside of the cloud formation stack, DNS entries can be manually created for both the aliases and either can be used to access the website.
 
@@ -64,7 +64,7 @@ the above example on a new cloud front distribution. i.e. Attempting to create:
       this,
       `TalisAppCdnSiteHostingConstruct`,
       {
-        domainName: "talis.io",
+        domainName: "leanlibrary.io",
         siteSubDomain: `production-eu-20231026-talis-app`,
         aliasSubDomains: ['talis-app'],
         ...
@@ -72,7 +72,7 @@ the above example on a new cloud front distribution. i.e. Attempting to create:
     );
 ```
 
-will fail. Despite the cloud formation stack having a different watermark, 20231026 instead of 20231025, and the siteSubDomain being `production-eu-20231026-talis-app.talis.io` instead of `production-eu-20231025-talis-app.talis.io` - the creation of the stack will fail due to the duplicate alias `talis-app.talis.io`.
+will fail. Despite the cloud formation stack having a different watermark, 20231026 instead of 20231025, and the siteSubDomain being `production-eu-20231026-talis-app.leanlibrary.io` instead of `production-eu-20231025-talis-app.leanlibrary.io` - the creation of the stack will fail due to the duplicate alias `talis-app.leanlibrary.io`.
 
 Therefore - when bringing up a new watermarked stack alongside an already live production stack, the alias sub domain must not initially be set:
 
@@ -81,7 +81,7 @@ Therefore - when bringing up a new watermarked stack alongside an already live p
       this,
       `TalisAppCdnSiteHostingConstruct`,
       {
-        domainName: "talis.io",
+        domainName: "leanlibrary.io",
         siteSubDomain: `production-eu-20231026-talis-app`,
         aliasSubDomains: [],
         ...
@@ -89,9 +89,9 @@ Therefore - when bringing up a new watermarked stack alongside an already live p
     );
 ```
 
-This will mean the new stack can be deployed and tested at the watermarked DNS name, e.g. `production-eu-20231026-talis-app.talis.io`.
+This will mean the new stack can be deployed and tested at the watermarked DNS name, e.g. `production-eu-20231026-talis-app.leanlibrary.io`.
 
-When ready to switch the stacks in production, the `talis-app.talis.io` alias needs to be deleted from the old stack and added to the new stack manually.
+When ready to switch the stacks in production, the `talis-app.leanlibrary.io` alias needs to be deleted from the old stack and added to the new stack manually.
 The DNS is then switched from the old cloud front distribution to the new one.
 
 If this was a simple DNS change, there would be no downtime. But due to the need to delete and recreate the alias on the cloud front distribution, there is a small
@@ -168,8 +168,8 @@ This is done [here](https://github.com/talis/hercules/blob/master/scripts/smalti
       release_version: version,
       app_environment: ENVIRONMENT_CONFIGS[environment][region].appEnvironment,
       release_app_watermark: releaseWatermark.trim(),
-      web_host: `http://${ENVIRONMENT_CONFIGS[environment][region].appEnvironment}-${releaseWatermark.trim()}-lti-admin.talis.io/`,
-      api_host: `https://${ENVIRONMENT_CONFIGS[environment][region].appEnvironment}-lti.talis.io/`,
+      web_host: `http://${ENVIRONMENT_CONFIGS[environment][region].appEnvironment}-${releaseWatermark.trim()}-lti-admin.leanlibrary.io/`,
+      api_host: `https://${ENVIRONMENT_CONFIGS[environment][region].appEnvironment}-lti.leanlibrary.io/`,
       is_live: releaseWatermark.trim() === ENVIRONMENT_CONFIGS[environment][region].releaseWatermark,
       slack_user: res.message.user.id,
       aws_deploy_context:
