@@ -9,8 +9,8 @@ import {
   CdnSiteHostingWithDnsConstruct,
 } from "../../../lib";
 
-export const STAGING_TALIS_IO_TLS_CERT_ARN =
-  "arn:aws:acm:us-east-1:302477901552:certificate/7973186a-2f4f-4d4e-92c7-d50f92f32718";
+export const STAGING_LEANLIBRARY_IO_TLS_CERT_ARN =
+  "arn:aws:acm:eu-west-1:152277381772:certificate/ca83c51c-bfb1-4716-8234-484a7c4f94e4";
 
 export class SimpleCdnSiteHostingConstructStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -29,7 +29,7 @@ export class SimpleCdnSiteHostingConstructStack extends cdk.Stack {
       this,
       `${prefix}CdnSiteHostingConstruct`,
       {
-        domainName: "talis.io",
+        domainName: "leanlibrary.io",
         removalPolicy: cdk.RemovalPolicy.DESTROY,
         // siteDomain: This would be the watermarked domain name e.g. elevate-20231025 from https://elevate-20231025.talis.com
         siteSubDomain: `${prefix}cdn-site-hosting-construct`,
@@ -39,7 +39,7 @@ export class SimpleCdnSiteHostingConstructStack extends cdk.Stack {
           s3deploy.Source.asset(path.resolve(__dirname, "./static-site")),
         ],
         websiteIndexDocument: "index.html",
-        certificateArn: STAGING_TALIS_IO_TLS_CERT_ARN,
+        certificateArn: STAGING_LEANLIBRARY_IO_TLS_CERT_ARN,
         securityPolicyProtocol: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
       },
     );
@@ -59,7 +59,7 @@ export class SimpleCdnSiteHostingConstructStack extends cdk.Stack {
           s3deploy.Source.asset(path.resolve(__dirname, "./static-site")),
         ],
         websiteIndexDocument: "index.html",
-        certificateArn: STAGING_TALIS_IO_TLS_CERT_ARN,
+        certificateArn: STAGING_LEANLIBRARY_IO_TLS_CERT_ARN,
       },
     );
   }
