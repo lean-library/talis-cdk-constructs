@@ -189,43 +189,43 @@ workflows:
             - fan_out
             - be_kind_to_your_colleagues
           context:
-            - cdk-deploy-to-leanlibrary-sandbox-20250709
+            - aws-account-id-leanlibrary-sandbox
             - aws-region-eu
       - deploy-lambda-worker:
           requires:
             - build
           context:
-            - cdk-deploy-to-leanlibrary-sandbox-20250709
+            - aws-account-id-leanlibrary-sandbox
             - aws-region-eu
       - deploy-cdn-site-hosting:
           requires:
             - build
           context:
-            - cdk-deploy-to-leanlibrary-sandbox-20250709
+            - aws-account-id-leanlibrary-sandbox
             - aws-region-eu
       - test:
           requires:
             - deploy-lambda-worker
             - deploy-cdn-site-hosting
           context:
-            - cdk-deploy-to-leanlibrary-sandbox-20250709
+            - aws-account-id-leanlibrary-sandbox
             - aws-region-eu
       - destroy-lambda-worker:
           requires:
             - test
           context:
-            - cdk-deploy-to-leanlibrary-sandbox-20250709
+            - aws-account-id-leanlibrary-sandbox
             - aws-region-eu
       - destroy-cdn-site-hosting:
           requires:
             - test
           context:
-            - cdk-deploy-to-leanlibrary-sandbox-20250709
+            - aws-account-id-leanlibrary-sandbox
             - aws-region-eu
       - semantic-release:
           requires:
             - destroy-lambda-worker
             - destroy-cdn-site-hosting
           context:
-            - cdk-deploy-to-leanlibrary-sandbox-20250709
+            - aws-account-id-leanlibrary-sandbox
             - aws-region-eu
