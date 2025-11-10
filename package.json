@@ -21,7 +21,7 @@
     "integration-test": "npm run build && npm run jest-integration-test",
     "jest-unit-test": "jest test/unit/",
     "jest-infra-test": "jest test/infra/",
-    "jest-integration-test": "jest test/integration/ --runInBand",
+    "jest-integration-test": "jest test/integration/",
     "lint:prettier": "prettier --check .",
     "lint:eslint": "eslint . --ext .ts",
     "lint": "npm run lint:prettier && npm run lint:eslint",
