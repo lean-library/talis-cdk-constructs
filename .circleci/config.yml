@@ -1,6 +1,7 @@
 version: 2.1
 
 orbs:
+  aws-cli: circleci/aws-cli@5.2.0
   node: circleci/node@5.3.0
 
 commands:
@@ -31,6 +32,12 @@ commands:
           name: Configure git to use https instead of git protocol
           command: git config --global url."https://".insteadOf git://
       - node/install-packages
+
+  aws_login:
+    steps:
+      - aws-cli/setup:
+          role_arn: arn:aws:iam::${AWS_ACCOUNT_ID}:role/content-linking-deployment-${AWS_REGION}
+          region: ${AWS_REGION}
 
 executors:
   default_executor:
@@ -95,6 +102,7 @@ jobs:
   deploy-cdn-site-hosting:
     executor: default_executor
     steps:
+      - aws_login
       - add_ssh_keys:
           fingerprints:
             - "ee:b4:00:e6:23:5b:55:bb:fd:07:bc:73:9e:f7:89:9c" # shared.aspire@talis.com 'talis-cdk-constructs Deploy Key'
