@@ -88,6 +88,7 @@ jobs:
   deploy-lambda-worker:
     executor: default_executor
     steps:
+      - aws_login
       - add_ssh_keys:
           fingerprints:
             - "ee:b4:00:e6:23:5b:55:bb:fd:07:bc:73:9e:f7:89:9c" # shared.aspire@talis.com 'talis-cdk-constructs Deploy Key'
@@ -116,6 +117,7 @@ jobs:
   test:
     executor: default_executor
     steps:
+      - aws_login
       - restore_root_build_number
       - set_aws_prefix
       - checkout
@@ -132,6 +134,7 @@ jobs:
   destroy-lambda-worker:
     executor: default_executor
     steps:
+      - aws_login
       - add_ssh_keys:
           fingerprints:
             - "ee:b4:00:e6:23:5b:55:bb:fd:07:bc:73:9e:f7:89:9c" # shared.aspire@talis.com 'talis-cdk-constructs Deploy Key'
@@ -145,6 +148,7 @@ jobs:
   destroy-cdn-site-hosting:
     executor: default_executor
     steps:
+      - aws_login
       - add_ssh_keys:
           fingerprints:
             - "ee:b4:00:e6:23:5b:55:bb:fd:07:bc:73:9e:f7:89:9c" # shared.aspire@talis.com 'talis-cdk-constructs Deploy Key'
