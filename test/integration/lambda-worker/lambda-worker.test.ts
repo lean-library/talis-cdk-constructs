@@ -31,7 +31,7 @@ describe("LambdaWorker", () => {
     for (const queueUrl of response.QueueUrls) {
       if (
         queueUrl ===
-        `https://sqs.eu-west-1.amazonaws.com/302477901552/${process.env.AWS_PREFIX}${queuePostfix}`
+        `https://sqs.eu-west-1.amazonaws.com/152277381772/${process.env.AWS_PREFIX}${queuePostfix}`
       ) {
         return queueUrl;
       }

@@ -64,37 +64,37 @@ async function findCloudfrontDistributionAliases(
 describe("CdnSiteHostingConstruct with no DNS", () => {
   test("successfully creates static website at cloudfront distribution domain name", async () => {
     const domainName = await findCloudfrontDistributionDomainName(
-      `${process.env.AWS_PREFIX}cdn-site-hosting-construct.talis.io`,
+      `${process.env.AWS_PREFIX}cdn-site-hosting-construct.leanlibrary.io`,
     );
     await assertWebsiteCreated(`https://${domainName}`, "Test Deployment");
   });
 
   test("does not create static website accessable at default alias", async () => {
-    const domainName = `${process.env.AWS_PREFIX}cdn-site-hosting-construct.talis.io`;
+    const domainName = `${process.env.AWS_PREFIX}cdn-site-hosting-construct.leanlibrary.io`;
     await assertWebsiteDoesNotExist(
       `https://${domainName}`,
-      `getaddrinfo ENOTFOUND ${process.env.AWS_PREFIX}cdn-site-hosting-construct.talis.io`,
+      `getaddrinfo ENOTFOUND ${process.env.AWS_PREFIX}cdn-site-hosting-construct.leanlibrary.io`,
     );
   });
 
   test("does not create static website accessable at additional alias", async () => {
-    const domainName = `${process.env.AWS_PREFIX}cdn-site-hosting-construct-alias.talis.io`;
+    const domainName = `${process.env.AWS_PREFIX}cdn-site-hosting-construct-alias.leanlibrary.io`;
     await assertWebsiteDoesNotExist(
       `https://${domainName}`,
-      `getaddrinfo ENOTFOUND ${process.env.AWS_PREFIX}cdn-site-hosting-construct-alias.talis.io`,
+      `getaddrinfo ENOTFOUND ${process.env.AWS_PREFIX}cdn-site-hosting-construct-alias.leanlibrary.io`,
     );
   });
 
   test("creates multiple aliases on the cloudfront distribution", async () => {
     const aliases = await findCloudfrontDistributionAliases(
-      `${process.env.AWS_PREFIX}cdn-site-hosting-construct.talis.io`,
+      `${process.env.AWS_PREFIX}cdn-site-hosting-construct.leanlibrary.io`,
     );
     expect(aliases.length).toBe(2);
     expect(aliases).toContain(
-      `${process.env.AWS_PREFIX}cdn-site-hosting-construct.talis.io`,
+      `${process.env.AWS_PREFIX}cdn-site-hosting-construct.leanlibrary.io`,
     );
     expect(aliases).toContain(
-      `${process.env.AWS_PREFIX}cdn-site-hosting-construct-alias.talis.io`,
+      `${process.env.AWS_PREFIX}cdn-site-hosting-construct-alias.leanlibrary.io`,
     );
   });
 });
@@ -102,31 +102,31 @@ describe("CdnSiteHostingConstruct with no DNS", () => {
 describe("CdnSiteHostingWithDnsConstruct", () => {
   test("successfully creates static website at cloudfront distribution domain name", async () => {
     const domainName = await findCloudfrontDistributionDomainName(
-      `${process.env.AWS_PREFIX}cdn-site-hosting-with-dns-construct.talis.io`,
+      `${process.env.AWS_PREFIX}cdn-site-hosting-with-dns-construct.leanlibrary.io`,
     );
     await assertWebsiteCreated(`https://${domainName}`, "Test Deployment");
   });
 
   test("successfully creates static website accessable at given dns", async () => {
-    const domainName = `${process.env.AWS_PREFIX}cdn-site-hosting-with-dns-construct.talis.io`;
+    const domainName = `${process.env.AWS_PREFIX}cdn-site-hosting-with-dns-construct.leanlibrary.io`;
     await assertWebsiteCreated(`https://${domainName}`, "Test Deployment");
   });
 
   test("successfully creates static website accessable at alias dns", async () => {
-    const domainName = `${process.env.AWS_PREFIX}cdn-site-hosting-with-dns-construct-alias.talis.io`;
+    const domainName = `${process.env.AWS_PREFIX}cdn-site-hosting-with-dns-construct-alias.leanlibrary.io`;
     await assertWebsiteCreated(`https://${domainName}`, "Test Deployment");
   });
 
   test("creates multiple aliases on the cloudfront distribution", async () => {
     const aliases = await findCloudfrontDistributionAliases(
-      `${process.env.AWS_PREFIX}cdn-site-hosting-with-dns-construct.talis.io`,
+      `${process.env.AWS_PREFIX}cdn-site-hosting-with-dns-construct.leanlibrary.io`,
     );
     expect(aliases.length).toBe(2);
     expect(aliases).toContain(
-      `${process.env.AWS_PREFIX}cdn-site-hosting-with-dns-construct.talis.io`,
+      `${process.env.AWS_PREFIX}cdn-site-hosting-with-dns-construct.leanlibrary.io`,
     );
     expect(aliases).toContain(
-      `${process.env.AWS_PREFIX}cdn-site-hosting-with-dns-construct-alias.talis.io`,
+      `${process.env.AWS_PREFIX}cdn-site-hosting-with-dns-construct-alias.leanlibrary.io`,
     );
   });
 });
